@@ -65,20 +65,13 @@ public class OwpengramServers {
 
     // OwpenGram's own production server RSA key.
             static final String OWPENGRAM_RSA_KEY =
-        "-----BEGIN RSA PUBLIC KEY-----
-" +
-        "MIIBCgKCAQEA0cAYosFwu+3CTNA013Icc+q524fqts/qpf6yF777zM8uG5+DFUZC
-" +
-        "ZyVqUE4e/Ws0QZnjUp/Ij2x5GI4nmJdWoQ4bJQpoY5BK87sqjZiMECgtAX46lhEl
-" +
-        "ZacnkTsaMN3SxsQOg0U/gZUhyXKC68aRj9UHDGjewjq2Yv1X3/X5ecn+fEjBc00f
-" +
-        "iU7mKOzRXXc2MGfCqejqV7kq+FIDi+OYB+ZyUwxS/MQna6tIoSK8WvyTDAh++Tt1
-" +
-        "SxMzrnvgYhbgWi8OKkIFaMybQeL+Woj5n7KriOYUHOiRmRnjq4RJh9a54ff7kJck
-" +
-        "vsUSH3ojQuStRhFrc/xO0BuPY35hl2sCgQIDAQAB
-" +
+        "-----BEGIN RSA PUBLIC KEY-----\n" +
+        "MIIBCgKCAQEA0cAYosFwu+3CTNA013Icc+q524fqts/qpf6yF777zM8uG5+DFUZC\n" +
+        "ZyVqUE4e/Ws0QZnjUp/Ij2x5GI4nmJdWoQ4bJQpoY5BK87sqjZiMECgtAX46lhEl\n" +
+        "ZacnkTsaMN3SxsQOg0U/gZUhyXKC68aRj9UHDGjewjq2Yv1X3/X5ecn+fEjBc00f\n" +
+        "iU7mKOzRXXc2MGfCqejqV7kq+FIDi+OYB+ZyUwxS/MQna6tIoSK8WvyTDAh++Tt1\n" +
+        "SxMzrnvgYhbgWi8OKkIFaMybQeL+Woj5n7KriOYUHOiRmRnjq4RJh9a54ff7kJck\n" +
+        "vsUSH3ojQuStRhFrc/xO0BuPY35hl2sCgQIDAQAB\n" +
         "-----END RSA PUBLIC KEY-----";
     static final long OWPENGRAM_RSA_FINGERPRINT = 0;
 
