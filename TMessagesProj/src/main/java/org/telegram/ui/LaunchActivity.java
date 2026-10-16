@@ -1086,18 +1086,10 @@ public class LaunchActivity extends BasePermissionsActivity implements INavigati
     }
 
     private BaseFragment getClientNotActivatedFragment() {
-        // Resuming a mid-login flow - server already chosen, continue where we left off
-        if (LoginActivity.loadCurrentState(false, currentAccount).getInt("currentViewNum", 0) != 0) {
-            return new LoginActivity();
-        }
-        // Adding a second account - skip intro, show server picker directly
-        for (int a = 0; a < UserConfig.MAX_ACCOUNT_COUNT; a++) {
-            if (a != currentAccount && UserConfig.getInstance(a).isClientActivated()) {
-                return new ServerSelectFragment();
-            }
-        }
-        // Fresh install - show intro; server picker is triggered from "Start Messaging"
-        return new IntroActivity();
+        OwpengramServers.setServerForAccount(OwpengramServers.ID_OWPENGRAM, currentAccount);
+        OwpengramServers.applyServerToAccount(OwpengramServers.owpengramServer(), currentAccount);
+        ConnectionsManager.getInstance(currentAccount).resumeNetworkMaybe();
+        return new LoginActivity();
     }
 
     public FireworksOverlay getFireworksOverlay() {
