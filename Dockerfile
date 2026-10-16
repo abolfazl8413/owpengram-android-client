@@ -33,18 +33,4 @@ RUN sdkmanager \
     "ndk;${ANDROID_NDK_VERSION}" \
     "cmake;3.22.1"
 
-CMD mkdir -p /home/source/TMessagesProj/build/outputs/apk && \
-    mkdir -p /home/gradle/TMessagesProj/build/outputs/bundle && \
-    mkdir -p /home/source/TMessagesProj/build/outputs/native-debug-symbols && \
-    cp -R /home/source/. /home/gradle && \
-    cd /home/gradle && \
-    gradle --parallel \
-        :TMessagesProj_App:bundleBundleAfat_SDK23Release \
-        :TMessagesProj_App:bundleBundleAfatRelease \
-        :TMessagesProj_AppStandalone:assembleAfatStandalone \
-        :TMessagesProj_App:assembleAfatRelease \
-        :TMessagesProj_AppHuawei:assembleAfatRelease --stacktrace && \
-    cp -R /home/gradle/TMessagesProj_App/build/outputs/apk/. /home/source/TMessagesProj/build/outputs/apk && \
-    cp -R /home/gradle/TMessagesProj_AppHuawei/build/outputs/apk/. /home/source/TMessagesProj/build/outputs/apk && \
-    cp -R /home/gradle/TMessagesProj_AppStandalone/build/outputs/apk/. /home/source/TMessagesProj/build/outputs/apk && \
-    cp -R /home/gradle/TMessagesProj_App/build/outputs/bundle/. /home/source/TMessagesProj/build/outputs/bundle
+CMD mkdir -p /home/source/TMessagesProj/build/outputs/apk &&     cp -R /home/source/. /home/gradle &&     mkdir -p /home/gradle/TMessagesProj/config &&     if [ ! -f /home/gradle/TMessagesProj/config/release.keystore ]; then         keytool -genkey -v -keystore /home/gradle/TMessagesProj/config/release.keystore -alias owpengramkey -keyalg RSA -keysize 2048 -validity 10000 -storepass 817564a59f09a3aa2ebc9029 -keypass 817564a59f09a3aa2ebc9029 -dname "CN=OwpenGram, OU=OwpenGram, O=OwpenGram, L=City, S=State, C=US";     fi &&     cd /home/gradle &&     gradle :TMessagesProj_AppStandalone:assembleAfatStandalone --stacktrace &&     cp -R /home/gradle/TMessagesProj_AppStandalone/build/outputs/apk/. /home/source/TMessagesProj/build/outputs/apk
