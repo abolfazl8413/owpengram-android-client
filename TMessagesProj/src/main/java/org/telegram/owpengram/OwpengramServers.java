@@ -64,7 +64,7 @@ public class OwpengramServers {
     private static final int    DEFAULT_PORT = 2398;
 
     // OwpenGram's own production server RSA key.
-        static final String OWPENGRAM_RSA_KEY =
+            static final String OWPENGRAM_RSA_KEY =
         "-----BEGIN RSA PUBLIC KEY-----
 " +
         "MIIBCgKCAQEA0cAYosFwu+3CTNA013Icc+q524fqts/qpf6yF777zM8uG5+DFUZC
