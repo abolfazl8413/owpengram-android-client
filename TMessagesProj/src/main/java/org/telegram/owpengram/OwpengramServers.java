@@ -60,20 +60,26 @@ public class OwpengramServers {
         customServersChangedListeners.remove(listener);
     }
 
-    private static final String DEFAULT_HOST = "152.89.254.50";
+    private static final String DEFAULT_HOST = "127.0.0.1";
     private static final int    DEFAULT_PORT = 2398;
 
     // OwpenGram's own production server RSA key.
-    static final String OWPENGRAM_RSA_KEY =
-        "-----BEGIN RSA PUBLIC KEY-----\n" +
-        "MIIBCgKCAQEAxUi0fsjiop7kTI+c+ATHwIs+XPcircj9WL/tNASH45/phiIvxhPU\n" +
-        "z4T6OgUfDVpQEC8SWCuq77aZAhnpZ0rfQ+h6vEv7X970wIAPT/hbyzekyWEFmH5Q\n" +
-        "RxSPrOMKF/V0wuTOVJcoHZW5r5cK7xsVe/otdYdOgt67kITS7pqoO1BlstRuOEHL\n" +
-        "jhaJ/40dXocrWpDQlJP2TZFwk5JF1Pbx/2mLr/asQapc/qbQP82b+iDLW8QIBT0f\n" +
-        "+xi4Js4k7Qo9kZSuUHUCDzmJt6Z0USBxxp/tSZRVjWRaT9ORDrdyfb/mKFSt9BtC\n" +
-        "B5VRJ1e0q7P/9/w21T0p9uV3eNXhnPnLFQIDAQAB\n" +
+        static final String OWPENGRAM_RSA_KEY =
+        "-----BEGIN RSA PUBLIC KEY-----
+" +
+        "MIIBCgKCAQEA0cAYosFwu+3CTNA013Icc+q524fqts/qpf6yF777zM8uG5+DFUZC
+" +
+        "ZyVqUE4e/Ws0QZnjUp/Ij2x5GI4nmJdWoQ4bJQpoY5BK87sqjZiMECgtAX46lhEl
+" +
+        "ZacnkTsaMN3SxsQOg0U/gZUhyXKC68aRj9UHDGjewjq2Yv1X3/X5ecn+fEjBc00f
+" +
+        "iU7mKOzRXXc2MGfCqejqV7kq+FIDi+OYB+ZyUwxS/MQna6tIoSK8WvyTDAh++Tt1
+" +
+        "SxMzrnvgYhbgWi8OKkIFaMybQeL+Woj5n7KriOYUHOiRmRnjq4RJh9a54ff7kJck
+" +
+        "vsUSH3ojQuStRhFrc/xO0BuPY35hl2sCgQIDAQAB
+" +
         "-----END RSA PUBLIC KEY-----";
-    // fingerprint == 0 -> native layer derives it from the PEM (see ConnectionsManager::applyServerConfig).
     static final long OWPENGRAM_RSA_FINGERPRINT = 0;
 
     // Official Telegram production RSA key (restored from original Android source)
