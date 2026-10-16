@@ -216,7 +216,7 @@ public class OwpengramServers {
     // --- Account - server binding ---
 
     public static String getServerIdForAccount(int accountNum) {
-        return getPrefs().getString(KEY_ACCOUNT_SERVER + accountNum, null);
+        return getPrefs().getString(KEY_ACCOUNT_SERVER + accountNum, ID_OWPENGRAM);
     }
 
     public static void setServerForAccount(String serverId, int accountNum) {
