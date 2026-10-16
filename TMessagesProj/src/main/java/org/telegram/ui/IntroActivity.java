@@ -407,7 +407,10 @@ public class IntroActivity extends BaseFragment implements NotificationCenter.No
                 return;
             }
             startPressed = true;
-            presentFragment(new ServerSelectFragment());
+            OwpengramServers.setServerForAccount(OwpengramServers.ID_OWPENGRAM, currentAccount);
+            OwpengramServers.applyServerToAccount(OwpengramServers.owpengramServer(), currentAccount);
+            ConnectionsManager.getInstance(currentAccount).resumeNetworkMaybe();
+            presentFragment(new LoginActivity(), true);
             // Reset so the button works again if the user navigates back from the
             // server picker (ServerSelectFragment is pushed on top, not finishing intro).
             startPressed = false;
