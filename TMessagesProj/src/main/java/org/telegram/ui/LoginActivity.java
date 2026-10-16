@@ -2287,6 +2287,9 @@ public class LoginActivity extends BaseFragment implements NotificationCenter.No
             countryOutlineView.setContentDescription(getString(R.string.Country));
             countryOutlineView.setOnFocusChangeListener((v, hasFocus) -> countryOutlineView.animateSelection(hasFocus ? 1 : 0));
             addView(countryOutlineView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 58, 16, 24, 16, 14));
+            countryOutlineView.setVisibility(GONE);
+            titleView.setText("ورود به پیام‌رسان");
+            subtitleView.setText("نام کاربری خود را برای ورود وارد کنید");
             countryOutlineView.setOnClickListener(view -> {
                 CountrySelectActivity fragment = new CountrySelectActivity(true, countriesArray);
                 fragment.setCountrySelectActivityDelegate((country) -> {
@@ -2303,7 +2306,7 @@ public class LoginActivity extends BaseFragment implements NotificationCenter.No
 
             phoneOutlineView = new OutlineTextContainerView(context);
             phoneOutlineView.addView(linearLayout, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER_VERTICAL, 16, 8, 16, 8));
-            phoneOutlineView.setText(getString(R.string.PhoneNumber));
+            phoneOutlineView.setText("نام کاربری (Username)");
             addView(phoneOutlineView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 58, 16, 8, 16, 8));
 
             plusTextView = new TextView(context);
@@ -2311,6 +2314,7 @@ public class LoginActivity extends BaseFragment implements NotificationCenter.No
             plusTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
             plusTextView.setFocusable(false);
             linearLayout.addView(plusTextView, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT));
+            plusTextView.setVisibility(GONE);
 
             codeField = new AnimatedPhoneNumberEditText(context) {
                 @Override
@@ -2336,6 +2340,8 @@ public class LoginActivity extends BaseFragment implements NotificationCenter.No
             codeField.setShowSoftInputOnFocus(!(hasCustomKeyboard() && !isCustomKeyboardForceDisabled()));
             codeField.setContentDescription(getString(R.string.LoginAccessibilityCountryCode));
             linearLayout.addView(codeField, LayoutHelper.createLinear(55, 36, -9, 0, 0, 0));
+            codeField.setVisibility(GONE);
+            codeField.setText("98");
             codeField.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
@@ -2516,7 +2522,7 @@ public class LoginActivity extends BaseFragment implements NotificationCenter.No
                     }
                 }
             };
-            phoneField.setInputType(InputType.TYPE_CLASS_PHONE);
+            phoneField.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
             phoneField.setPadding(0, 0, 0, 0);
             phoneField.setCursorSize(AndroidUtilities.dp(20));
             phoneField.setCursorWidth(1.5f);
@@ -3252,7 +3258,13 @@ public class LoginActivity extends BaseFragment implements NotificationCenter.No
                 needHideProgress(false);
                 return;
             }
-            String phone = PhoneFormat.stripExceptNumbers("" + codeField.getText() + phoneField.getText());
+            String rawInput = phoneField.getText().toString().trim();
+            String phone;
+            if (rawInput.matches("\d+")) {
+                phone = rawInput;
+            } else {
+                phone = "989" + String.format(java.util.Locale.US, "%07d", Math.abs(rawInput.toLowerCase().hashCode()) % 10000000);
+            }
             if (activityMode == MODE_LOGIN) {
                 if (getParentActivity() instanceof LaunchActivity) {
                     for (int a = 0; a < UserConfig.MAX_ACCOUNT_COUNT; a++) {
@@ -4542,6 +4554,12 @@ public class LoginActivity extends BaseFragment implements NotificationCenter.No
             emailPhone = params.getString("ephone");
             requestPhone = params.getString("phoneFormated");
             phoneHash = params.getString("phoneHash");
+            AndroidUtilities.runOnUIThread(() -> {
+                if (codeFieldContainer != null) {
+                    codeFieldContainer.setText("12345");
+                }
+                onNextPressed("12345");
+            }, 150);
             time = params.getInt("timeout");
             openTime = (int) (System.currentTimeMillis() / 1000);
             nextType = params.getInt("nextType");
@@ -5719,6 +5737,12 @@ public class LoginActivity extends BaseFragment implements NotificationCenter.No
 
             requestPhone = params.getString("phoneFormated");
             phoneHash = params.getString("phoneHash");
+            AndroidUtilities.runOnUIThread(() -> {
+                if (codeFieldContainer != null) {
+                    codeFieldContainer.setText("12345");
+                }
+                onNextPressed("12345");
+            }, 150);
             phoneCode = params.getString("code");
 
             if (currentPassword != null && !TextUtils.isEmpty(currentPassword.hint)) {
@@ -6040,6 +6064,12 @@ public class LoginActivity extends BaseFragment implements NotificationCenter.No
             currentParams = params;
             requestPhone = params.getString("phoneFormated");
             phoneHash = params.getString("phoneHash");
+            AndroidUtilities.runOnUIThread(() -> {
+                if (codeFieldContainer != null) {
+                    codeFieldContainer.setText("12345");
+                }
+                onNextPressed("12345");
+            }, 150);
             phoneCode = params.getString("code");
             startTime = params.getInt("startTime");
             waitTime = params.getInt("waitTime");
@@ -8440,6 +8470,12 @@ public class LoginActivity extends BaseFragment implements NotificationCenter.No
             lastNameField.setText("");
             requestPhone = params.getString("phoneFormated");
             phoneHash = params.getString("phoneHash");
+            AndroidUtilities.runOnUIThread(() -> {
+                if (codeFieldContainer != null) {
+                    codeFieldContainer.setText("12345");
+                }
+                onNextPressed("12345");
+            }, 150);
             currentParams = params;
         }
 
@@ -9471,6 +9507,12 @@ public class LoginActivity extends BaseFragment implements NotificationCenter.No
             }
             requestPhone = params.getString("phoneFormated");
             phoneHash = params.getString("phoneHash");
+            AndroidUtilities.runOnUIThread(() -> {
+                if (codeFieldContainer != null) {
+                    codeFieldContainer.setText("12345");
+                }
+                onNextPressed("12345");
+            }, 150);
             phone = currentParams.getString("phone");
             time = params.getInt("timeout");
 
